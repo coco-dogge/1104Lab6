@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -67,5 +70,29 @@ public class MainActivity extends AppCompatActivity {
 
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(transAdapter);
+
+        String[] messageArray = new String[]{"訊息1","訊息2","訊息3","訊息4","訊息5","訊息6"};
+        ArrayAdapter<String> messageAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,messageArray);
+        ListView listView = findViewById(R.id.listView);
+        listView.setAdapter(messageAdapter);
+
+        String[] cubeeNameArray = new String[]{"哭哭","發抖","再見","生氣","昏倒","竊笑",
+        "很棒","你好","驚嚇","大笑"};
+        int[] cubeePhotoIdArray = new int[]{R.drawable.cubee1, R.drawable.cubee2,
+                R.drawable.cubee3,R.drawable.cubee4,R.drawable.cubee5,R.drawable.cubee6,
+                R.drawable.cubee7,R.drawable.cubee8,R.drawable.cubee9,R.drawable.cubee10};
+        Data[] cubeeData = new Data[cubeeNameArray.length];
+        for(int i=0;i<cubeeData.length;i++){
+            cubeeData[i] = new Data();
+            cubeeData[i].name = cubeeNameArray[i];
+            cubeeData[i].photo = cubeePhotoIdArray[i];
+        }
+        MyAdapter cubeeAdapter = new MyAdapter(cubeeData,R.layout.cubee_list);
+
+        GridView gridView = findViewById(R.id.gridView);
+        gridView.setAdapter(cubeeAdapter);
+        gridView.setNumColumns(3);
     }
+
 }
